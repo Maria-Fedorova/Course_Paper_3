@@ -1,21 +1,21 @@
-import utils
+from src import utils
 
 
 def test_load_operations():
-    x = utils.load_operations('operations.json')
+    x = utils.load_operations('../src/operations.json')
     assert len(x) != 0
     assert type(x) == list
     assert type(x[0]) == dict
 
 
 def test_filter_operations():
-    x = utils.load_operations('operations.json')
+    x = utils.load_operations('../src/operations.json')
     y = utils.filter_operations(x)
     assert y[0].get('state') == 'EXECUTED'
 
 
 def test_sort_operations():
-    x = utils.load_operations('operations.json')
+    x = utils.load_operations('../src/operations.json')
     y = utils.filter_operations(x)
     z = utils.sort_operations(y)
     assert z[0].get('date') > z[1].get('date')
@@ -26,7 +26,7 @@ def test_sort_operations():
 
 
 def test_cut_operations():
-    x = utils.load_operations('operations.json')
+    x = utils.load_operations('../src/operations.json')
     y = utils.filter_operations(x)
     z = utils.sort_operations(y)
     k = utils.cut_operations(z)
@@ -40,5 +40,5 @@ def test_formatter_date():
 
 def test_mask_account():
     assert utils.mask_account(None) == ('', '')
-    assert utils.mask_account('1234567812345678') == '123456******5678'
-    assert utils.mask_account('12345678123456781234') == '**1234'
+    assert utils.mask_account('MasterCard 1234567812345678') == ('MasterCard ', '1234 56** **** 5678 ')
+    assert utils.mask_account('Счет 12345678123456781234') == ('Счет ', '**1234 ')
