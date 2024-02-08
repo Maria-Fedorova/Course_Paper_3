@@ -2,20 +2,20 @@ from src import utils
 
 
 def test_load_operations():
-    x = utils.load_operations('../src/operations.json')
+    x = utils.load_operations('operations.json')
     assert len(x) != 0
     assert type(x) == list
     assert type(x[0]) == dict
 
 
 def test_filter_operations():
-    x = utils.load_operations('../src/operations.json')
+    x = utils.load_operations('operations.json')
     y = utils.filter_operations(x)
     assert y[0].get('state') == 'EXECUTED'
 
 
 def test_sort_operations():
-    x = utils.load_operations('../src/operations.json')
+    x = utils.load_operations('operations.json')
     y = utils.filter_operations(x)
     z = utils.sort_operations(y)
     assert z[0].get('date') > z[1].get('date')
@@ -26,7 +26,7 @@ def test_sort_operations():
 
 
 def test_cut_operations():
-    x = utils.load_operations('../src/operations.json')
+    x = utils.load_operations('operations.json')
     y = utils.filter_operations(x)
     z = utils.sort_operations(y)
     k = utils.cut_operations(z)
