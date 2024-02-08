@@ -69,3 +69,23 @@ def mask_account(account):
         return letters + " ", digits + " "
     else:
         return '', ''
+
+
+def print_result():
+    operations = load_operations('operations.json')
+    operations = filter_operations(operations)
+    operations = sort_operations(operations)
+    operations = cut_operations(operations)
+    for operation in operations:
+        try:
+            print(f"\n{formatter_date(operation['date'])} {operation['description']}\n"
+                  f"{mask_account(operation.get('from'))[0]}{mask_account(operation.get('from'))[1]}-> "
+                  f"{mask_account(operation.get('to'))[0]}{mask_account(operation.get('to'))[1]}\n"
+                  f"{operation['operationAmount']['amount']} {operation['operationAmount']['currency']['name']}")
+        except KeyError:
+            operation['date'] = None
+            operation['from'] = None
+            operation['to'] = None
+            operation['operationAmount']['amount'] = None
+            operation['operationAmount']['currency']['name'] = None
+    return 0

@@ -42,3 +42,7 @@ def test_mask_account():
     assert utils.mask_account(None) == ('', '')
     assert utils.mask_account('MasterCard 1234567812345678') == ('MasterCard ', '1234 56** **** 5678 ')
     assert utils.mask_account('Счет 12345678123456781234') == ('Счет ', '**1234 ')
+
+
+def test_print_result():
+    assert utils.print_result() == 0
