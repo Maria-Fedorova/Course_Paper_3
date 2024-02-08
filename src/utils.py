@@ -72,6 +72,9 @@ def mask_account(account):
 
 
 def print_result():
+    """
+    Печать итогового результата работы программы
+    """
     operations = load_operations('operations.json')
     operations = filter_operations(operations)
     operations = sort_operations(operations)
