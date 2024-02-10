@@ -61,12 +61,19 @@ def mask_account(account):
     if account is not None:
         my_op_is_from_to = account.split(" ")
         letters = my_op_is_from_to[0]
-        digits = my_op_is_from_to[1]
+
+        if my_op_is_from_to[1].isdigit():
+            digits = my_op_is_from_to[1]
+        else:
+            letters = letters + " " + my_op_is_from_to[1]
+            digits = my_op_is_from_to[2]
+
         if len(digits) == 16:
             digits = f"{digits[:4]} {digits[4:6]}** **** {digits[-4:]}"
         elif len(digits) == 20:
             digits = f"**{digits[-4:]}"
         return letters + " ", digits + " "
+
     else:
         return '', ''
 
